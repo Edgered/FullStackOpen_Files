@@ -21,7 +21,8 @@ const App = (props) => {
     // axios
     //   .get('http://localhost:3001/notes')
       .then(initialNotes => {
-        console.log('promise fulfilled')
+        console.log('promise fulfilled', initialNotes)
+
         setNotes(initialNotes)
       })
   }, [])
@@ -66,6 +67,7 @@ const App = (props) => {
     : notes.filter(note => note.important === true)
 
   const toggleImportanceOf = (id) => {
+    console.log('toggle importance', id)
     const url = `http://localhost:3001/notes/${id}`
     const note = notes.find(n => n.id === id)
     const changedNote = { ...note, important: !note.important }
@@ -89,7 +91,7 @@ const App = (props) => {
         </button>
       </div>
       <ul>
-        {notesToShow.map(note  => 
+        {notesToShow.map(note => 
         <Note 
         key={note.id} note={note} 
         toggleImportanceOf={() => toggleImportanceOf(note.id)}
